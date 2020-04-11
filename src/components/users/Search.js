@@ -6,9 +6,13 @@ const Search = (props) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault()
-
-		props.searchUsers(search)
-		setSearch('')
+		if (search === '') {
+			props.setAlert('Digite algo', 'light')
+		} else {
+			props.searchUsers(search)
+			setSearch('')
+			props.setAlert(null)
+		}
 	}
 
 	// render() {
@@ -49,5 +53,6 @@ Search.propType = {
 	searchUsers: PropTypes.func.isRequired,
 	clearUsers: PropTypes.func.isRequired,
 	showClearButton: PropTypes.bool.isRequired,
+	setAlert: PropTypes.func.isRequired,
 }
 export default Search

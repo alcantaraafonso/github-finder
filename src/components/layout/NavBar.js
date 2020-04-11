@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
 
@@ -7,8 +8,11 @@ const NavBar = ({ icon, title }) => {
 	return (
 		<nav className="navbar bg-primary">
 			<h1>
-				<i className={`fab fa-${icon}`}></i> {title}
+				<Link to="/">
+					<i className={`fab fa-${icon}`}></i> {title}
+				</Link>
 			</h1>
+			<Link to="/about">Sobre</Link>
 		</nav>
 	)
 }
