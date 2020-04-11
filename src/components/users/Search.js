@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const Search = (props) => {
+const Search = ({ showClearButton, searchUsers, setAlertMsg, clearUsers }) => {
 	const [search, setSearch] = useState('')
 
 	const onSubmit = (e) => {
 		e.preventDefault()
 		if (search === '') {
-			props.setAlert('Digite algo', 'light')
+			setAlertMsg('Digite algo', 'light')
 		} else {
-			props.searchUsers(search)
+			searchUsers(search)
 			setSearch('')
-			props.setAlert(null)
+			setAlertMsg(null)
 		}
 	}
 
@@ -34,12 +34,12 @@ const Search = (props) => {
 					<i className="fas fa-search"></i>
 				</button>
 			</form>
-			{props.showClearButton && (
+			{showClearButton && (
 				<button
 					type="submit"
 					value="Search"
 					className="btn btn-block btn-light"
-					onClick={props.clearUsers}
+					onClick={clearUsers}
 				>
 					<i className="fas fa-trash-restore-alt"></i>
 				</button>
@@ -53,6 +53,6 @@ Search.propType = {
 	searchUsers: PropTypes.func.isRequired,
 	clearUsers: PropTypes.func.isRequired,
 	showClearButton: PropTypes.bool.isRequired,
-	setAlert: PropTypes.func.isRequired,
+	setAlertMsg: PropTypes.func.isRequired,
 }
 export default Search
