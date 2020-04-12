@@ -9,16 +9,23 @@ import {
 	GET_USER_DETAILS,
 	CLEAR_USER,
 	SET_LOADING,
-	SET_ALERT_MSG,
-	SET_ALERT_CLEAR,
 } from '../types'
+
+let githubClientId
+let githubClientSecret
+if (process.env.NODE_ENV !== 'production') {
+	githubClientId = process.env.REACT_APP_CLIENT_ID
+	githubClientSecret = process.env.REACT_APP_CLIENT_SECRET
+} else {
+	githubClientId = process.env.CLIENT_ID
+	githubClientSecret = process.env.CLIENT_SECRET
+}
 
 const GithubState = (props) => {
 	const initialState = {
 		users: [],
 		user: {},
 		loading: false,
-		alert: null,
 	}
 
 	const [state, dispatch] = useReducer(GithubReducer, initialState)
@@ -36,7 +43,7 @@ const GithubState = (props) => {
 		setLoading()
 
 		const res = await axios.get(
-			`https://api.github.com/search/users?q=${user}&client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}`
+			`https://api.github.com/search/users?q=${user}&client_id=${githubClientId}&client_secret=${githubClientSecret}`
 		)
 
 		dispatch({
@@ -50,7 +57,7 @@ const GithubState = (props) => {
 		setLoading()
 
 		const res = await axios.get(
-			`https://api.github.com/users/${login}?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}`
+			`https://api.github.com/users/${login}?client_id=${githubClientId}&client_secret=${githubClientSecret}`
 		)
 		// const res = await axios.get(`https://api.github.com/users/${login}`)
 
@@ -65,30 +72,16 @@ const GithubState = (props) => {
 	//Set loading
 	const setLoading = () => dispatch({ type: SET_LOADING })
 
-	//Set Alert Msg
-	const setAlertMsg = (msg, type) => {
-		if (msg !== null) {
-			dispatch({
-				type: SET_ALERT_MSG,
-				payload: { msg, type },
-			})
-		} else {
-			dispatch({ type: SET_ALERT_CLEAR })
-		}
-	}
-
 	return (
 		<GithubContext.Provider
 			value={{
 				users: state.users,
 				user: state.user,
 				loading: state.loading,
-				alert: state.alert,
 				searchUsers,
 				getUserDetails,
 				setLoading,
 				clearUser,
-				setAlertMsg,
 			}}
 		>
 			{props.children}

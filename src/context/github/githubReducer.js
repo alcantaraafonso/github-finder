@@ -3,8 +3,6 @@ import {
 	GET_USER_DETAILS,
 	CLEAR_USER,
 	SET_LOADING,
-	SET_ALERT_MSG,
-	SET_ALERT_CLEAR,
 } from '../types'
 
 export default (state, action) => {
@@ -29,18 +27,6 @@ export default (state, action) => {
 			return {
 				...state,
 				users: [],
-			}
-		}
-		case SET_ALERT_CLEAR: {
-			return {
-				...state,
-				alert: null,
-			}
-		}
-		case SET_ALERT_MSG: {
-			return {
-				...state,
-				alert: action.payload,
 			}
 		}
 		default:
