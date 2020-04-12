@@ -1,9 +1,21 @@
-import React, { useEffect } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect, useContext } from 'react'
+
+import GithubContext from '../../context/github/githubContext'
 
 import Spinner from '../layout/Spinner'
 
-const UserDetail = ({ user, match, getUserDetails, loading }) => {
+const UserDetail = ({ match }) => {
+	const context = useContext(GithubContext)
+
+	/**
+	 * O array no final indica a condição/componente que o useEffect deve ser rodado
+	 * Como desejamos que rode apenas uma vez, setamos um array vazio
+	 */
+	useEffect(() => {
+		context.getUserDetails(match.params.login)
+		//eslint-disable-next-line
+	}, [])
+
 	const {
 		login,
 		html_url,
@@ -17,18 +29,9 @@ const UserDetail = ({ user, match, getUserDetails, loading }) => {
 		following,
 		public_repos,
 		public_gists,
-	} = user
+	} = context.user
 
-	/**
-	 * O array no final indica a condição/componente que o useEffect deve ser rodado
-	 * Como desejamos que rode apenas uma vez, setamos um array vazio
-	 */
-	useEffect(() => {
-		getUserDetails(match.params.login)
-		//eslint-disable-next-line
-	}, [])
-
-	return loading ? (
+	return context.loading ? (
 		<Spinner />
 	) : (
 		<>
@@ -87,12 +90,6 @@ const UserDetail = ({ user, match, getUserDetails, loading }) => {
 			</div>
 		</>
 	)
-}
-
-UserDetail.propTypes = {
-	user: PropTypes.object.isRequired,
-	getUserDetails: PropTypes.func.isRequired,
-	loading: PropTypes.bool.isRequired,
 }
 
 export default UserDetail

@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState, useContext } from 'react'
 
-const Search = ({ showClearButton, searchUsers, setAlertMsg, clearUsers }) => {
+import GithubContext from '../../context/github/githubContext'
+
+const Search = (props) => {
+	const githubContext = useContext(GithubContext)
 	const [search, setSearch] = useState('')
 
 	const onSubmit = (e) => {
 		e.preventDefault()
 		if (search === '') {
-			setAlertMsg('Digite algo', 'light')
+			githubContext.setAlertMsg('Digite algo', 'light')
 		} else {
-			searchUsers(search)
+			githubContext.searchUsers(search)
 			setSearch('')
-			setAlertMsg(null)
+			githubContext.setAlertMsg(null)
 		}
 	}
 
@@ -34,12 +36,12 @@ const Search = ({ showClearButton, searchUsers, setAlertMsg, clearUsers }) => {
 					<i className="fas fa-search"></i>
 				</button>
 			</form>
-			{showClearButton && (
+			{githubContext.users.length > 0 && (
 				<button
 					type="submit"
 					value="Search"
 					className="btn btn-block btn-light"
-					onClick={clearUsers}
+					onClick={githubContext.clearUsers}
 				>
 					<i className="fas fa-trash-restore-alt"></i>
 				</button>
@@ -49,10 +51,4 @@ const Search = ({ showClearButton, searchUsers, setAlertMsg, clearUsers }) => {
 	// }
 }
 
-Search.propType = {
-	searchUsers: PropTypes.func.isRequired,
-	clearUsers: PropTypes.func.isRequired,
-	showClearButton: PropTypes.bool.isRequired,
-	setAlertMsg: PropTypes.func.isRequired,
-}
 export default Search
