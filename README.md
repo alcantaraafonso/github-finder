@@ -12,13 +12,13 @@ Abrir: [http://localhost:3000](http://localhost:3000)
 
 ### Tela Inicial
 
-![](/src/assets/img/telainicial.png)
+![Tela inicial](src/assets/img/telainicial.png)
 
 Use a barra de pesquisa pra buscar os usuários na API do GitHub
 
 ### Tela de Resultados
 
-![](/src/assets/img/teladois.png)
+![Tela dois](/src/assets/img/teladois.png)
 
 Uma vez digitado o usuário, clique em More para ter mais detalhes do usuário
 
