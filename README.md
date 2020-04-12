@@ -12,7 +12,7 @@ Abrir: [http://localhost:3000](http://localhost:3000)
 
 ### Tela Inicial
 
-![](/src/assets/img/telainicial.png)
+![](src/assets/img/telainicial.png)
 
 Use a barra de pesquisa pra buscar os usuários na API do GitHub
 
