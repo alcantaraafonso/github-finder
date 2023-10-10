@@ -1,9 +1,12 @@
 ## Github Finder
 
-Este projeto foi criado usando React 16 e utiliza conceitos de function componentes e hooks (useState, useEffect e useContext). Também usa um CSS próprio para criar as views <br />
+Este projeto foi criado usando React 16 e Node 16. Utiliza conceitos de function componentes e hooks (useState, useEffect e useContext). Também usa um CSS próprio para criar as views <br />
 Consome a API do próprio GitHub para buscar os usuários e suas informações básicas.
 
-### `yarn start - local`
+### Comandos
+Instale os pacotes executando o comando `npm install`
+
+Para executar, execute o comando `yarn start -local`
 
 Para rodar local.<br />
 Abrir: [http://localhost:3000](http://localhost:3000)
